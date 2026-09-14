@@ -1,0 +1,36 @@
+[project]
+name = "lab-scout"
+version = "0.1.0"
+description = "Radagast: a weekly Discord digest of homelab project ideas, run as a Kubernetes CronJob."
+readme = "README.md"
+requires-python = ">=3.12"
+# Runtime is the standard library only. Keep it that way: every dependency is
+# attack surface in a job that handles web-shaped model output and a webhook.
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest==8.4.2",
+    "pyyaml==6.0.3",
+    "ruff==0.14.0",
+]
+
+[tool.uv]
+# Not built or installed: the image copies src/lab_scout and runs it with
+# `python -m lab_scout`, and pytest imports it from src.
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "I"]
+# Kept as written in the Ansible original the code was ported from.
+ignore = ["UP017"]

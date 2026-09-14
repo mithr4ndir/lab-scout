@@ -1,0 +1,23 @@
+# Lab profile for lab-scout, passed to the model as data.
+# Keep it factual and short; the model is told not to repeat numbers from it.
+constraints:
+- No cloud resources yet
+- Everything managed as code (Ansible, Terraform, ArgoCD)
+- Security-first
+- Self-hosted preferred
+- Open source only
+hardware:
+- Two Proxmox VE nodes (pve and pve2)
+- TrueNAS NAS for storage
+- No GPU
+- 1G managed switch, with a 10G direct NIC link between the storage node and the NAS
+- command-center1 automation VM with 4 vCPU and 16 GiB RAM
+interests:
+- Kubernetes and GitOps
+- Observability with Prometheus, Grafana, Loki and Vector
+- Detection engineering with Wazuh and Sigma
+- Astronomy data infrastructure (LSDB, Dask)
+- Security hardening
+- Portfolio-worthy projects for a systems engineer
+- New operating systems to try in Proxmox VMs (immutable, BSD, microkernel, research)
+- Robotics software (ROS, simulation, small hobby robots) that runs without a GPU
