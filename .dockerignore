@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+.pytest_cache
+.ruff_cache
+**/__pycache__
+**/*.pyc
+claude/node_modules
+tests
+uv.lock
+pyproject.toml
+README.md
+.env
+.env.*

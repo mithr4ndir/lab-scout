@@ -1,0 +1,10 @@
+{
+  "name": "lab-scout-claude",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pins the claude CLI baked into the lab-scout image. Installed with npm ci from package-lock.json.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "2.1.270"
+  }
+}
