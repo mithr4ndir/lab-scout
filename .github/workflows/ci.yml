@@ -96,15 +96,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Same context and build cache as the scanned build, so every layer is
-      # a cache hit: the pushed image is the scanned one.
-      - name: Push image
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ env.IMAGE }}:${{ steps.ver.outputs.semver }}
-            ${{ env.IMAGE }}:sha-${{ github.sha }}
-            ${{ env.IMAGE }}:latest
-          cache-from: type=gha
+      # Push the image that was scanned, not a rebuild: a cache miss on a second
+      # build could produce different, unscanned layers.
+      - name: Push scanned image
+        env:
+          SEMVER: ${{ steps.ver.outputs.semver }}
+          SHA: ${{ github.sha }}
+        run: |
+          for tag in "$SEMVER" "sha-$SHA" latest; do
+            docker tag lab-scout:scan "$IMAGE:$tag"
+            docker push "$IMAGE:$tag"
+          done
+          docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE:$SEMVER"

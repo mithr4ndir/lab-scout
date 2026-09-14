@@ -11,6 +11,7 @@ hardware:
 - TrueNAS NAS for storage
 - No GPU
 - 1G managed switch, with a 10G direct NIC link between the storage node and the NAS
+- Kubernetes cluster of three VMs on Proxmox, NFS storage from TrueNAS, synced by ArgoCD
 - command-center1 automation VM with 4 vCPU and 16 GiB RAM
 interests:
 - Kubernetes and GitOps
