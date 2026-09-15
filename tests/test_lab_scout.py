@@ -605,6 +605,29 @@ def test_known_numbered_project_names_are_not_numeric_claims(ls: Any, sandbox: S
     assert logged_dropped(capsys.readouterr().err) == 3
 
 
+def test_technical_terms_with_digits_are_not_numeric_claims(ls: Any, sandbox: Sandbox,
+                                                           capsys: pytest.CaptureFixture[str]) -> None:
+    # In-cluster dry run 2026-09-15 dropped the only OS and robotics ideas as
+    # "states a number". Terms like these describe a project, they are not
+    # claims that can go stale or be misremembered.
+    ideas = [
+        idea("Sim Arena", summary="A 2D and 3D multi-robot simulator for ROS 1 and ROS 2.", category="robotics"),
+        idea("Rusty Kernel", summary="A Rust kernel for x86-64 and x86_64 hosts, 64-bit only, no i386 or 32-bit.", category="os"),
+        idea("Starry Sim", summary="A 3D simulator with 12k stars.", category="robotics"),
+        idea("Big Box", summary="Needs 16 GiB for its 3D renderer.", category="os"),
+    ]
+    sandbox.set_claude(envelope(ideas))
+    sandbox.set_gh(gh_for(ideas))
+    opener = FakeOpener()
+    assert run_main(ls, sandbox, opener=opener) == 0
+    assert [e["title"] for e in only_payload(opener)["embeds"]] == ["Sim Arena", "Rusty Kernel"]
+    err = capsys.readouterr().err
+    assert logged_dropped(err) == 2
+    # The drop reason names the offending text, so the filter can be tuned from real runs.
+    assert "states a number ('12k" in err
+    assert "states a number ('16 GiB" in err
+
+
 def test_categories_are_spread_before_repeats(ls: Any, sandbox: Sandbox) -> None:
     ideas = [idea(f"Guard {n}", category="security") for n in ("Alpha", "Bravo", "Charlie", "Delta", "Echo")]
     ideas += [idea("Distro Fox", category="os"), idea("Robot Golf", category="robotics"), idea("Guard Hotel", category="security")]

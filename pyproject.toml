@@ -1,6 +1,6 @@
 [project]
 name = "lab-scout"
-version = "0.1.0"
+version = "0.1.1"
 description = "Radagast: a weekly Discord digest of homelab project ideas, run as a Kubernetes CronJob."
 readme = "README.md"
 requires-python = ">=3.12"

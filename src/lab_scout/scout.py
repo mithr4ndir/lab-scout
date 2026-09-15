@@ -322,7 +322,11 @@ NAME_NUMBER_RE = re.compile(r"(?<![\w.])v?\d+(?:[.,]\d+)*[kKmM%]?(?!\w)")
 # Project names that carry a digit as part of the name, not as a claim. They
 # are removed before the number checks, so "ROS 2" passes but "ROS 2.5" and
 # "ROS 22" still count as numbers.
-NUMBERED_NAMES_RE = re.compile(r"(?i)\bROS 2\b(?![.,]\d)|\bPlan 9\b(?![.,]\d)|\b9front\b")
+NUMBERED_NAMES_RE = re.compile(
+    r"(?i)\bROS [12]\b(?![.,]\d)|\bPlan 9\b(?![.,]\d)|\b9front\b"
+    # Technical terms that describe a project rather than claim a figure.
+    r"|\b[23]D\b|\bx86[-_]64\b|\b(?:32|64)-bit\b|\bi[36]86\b"
+)
 
 
 def clean_text(value: str, limit: int) -> str:
@@ -875,8 +879,13 @@ def checked_text(raw: Any, key: str, cap: int) -> str:
     if "://" in text or re.search(r"(?i)\bwww\.", text):
         raise Rejected(f"{key} contains a link")
     number = NAME_NUMBER_RE if key == "name" else NUMERIC_CLAIM_RE
-    if number.search(NUMBERED_NAMES_RE.sub("", text)):
-        raise Rejected(f"{key} states a number")
+    remainder = NUMBERED_NAMES_RE.sub("", text)
+    match = number.search(remainder)
+    if match:
+        # Name the offending text so the filter can be tuned from real runs. The
+        # field already passed the link, IP and secret checks above.
+        excerpt = remainder[match.start():match.start() + 12].split("\n")[0]
+        raise Rejected(f"{key} states a number ({excerpt!r})")
     return text
 
 
