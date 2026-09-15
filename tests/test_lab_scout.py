@@ -1534,7 +1534,8 @@ def test_baked_profile_is_yaml_and_factual() -> None:
 
 def test_version_matches_pyproject() -> None:
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
-    assert project["version"] == lab_scout.__version__ == "0.1.0"
+    assert project["version"] == lab_scout.__version__
+    assert re.fullmatch(r"\d+\.\d+\.\d+", project["version"]), "CI tags images with this plain semver"
     assert project["dependencies"] == [], "runtime is the standard library only"
 
 
