@@ -823,6 +823,10 @@ class Rejected(Exception):
     """An idea that is dropped. The message is safe to log (no URL)."""
 
 
+class GitHubRateLimited(Rejected):
+    """The GitHub API answered 403 or 429: further calls this run would too."""
+
+
 def is_ip_literal(host: str) -> bool:
     try:
         ipaddress.ip_address(host.strip("[]"))
@@ -969,7 +973,7 @@ def fetch_github_repo(owner: str, repo: str, opener: Opener | None, token: str |
         if code in (403, 429):
             # Fails closed: without facts the idea is not posted.
             log.warning("github: API answered HTTP %d (rate limited or forbidden); dropping the idea", code)
-            raise Rejected(f"GitHub API rate limited or forbidden (HTTP {code})") from None
+            raise GitHubRateLimited(f"GitHub API rate limited or forbidden (HTTP {code})") from None
         raise Rejected(f"GitHub API request failed (HTTP {code})") from None
     except (urllib.error.URLError, OSError, ValueError, http.client.HTTPException) as exc:
         # These can carry request details in their text. Keep only the type.
@@ -988,7 +992,12 @@ def github_facts(owner: str, repo: str, now: dt.datetime, max_stale_days: int,
     # Checked again here: these become part of the request URL.
     if not GH_OWNER_RE.match(owner) or not GH_REPO_RE.match(repo) or repo in (".", ".."):
         raise Rejected("GitHub owner or repo name is malformed")
-    data = fetch_github_repo(owner, repo, opener, token)
+    return repo_facts(owner, repo, fetch_github_repo(owner, repo, opener, token), now, max_stale_days)
+
+
+def repo_facts(owner: str, repo: str, data: Any, now: dt.datetime, max_stale_days: int) -> RepoFacts:
+    """Facts from a GitHub repository object (GET /repos/O/R or a search
+    hit, which carry the same fields), or Rejected. Fails closed."""
     if not isinstance(data, dict):
         raise Rejected("GitHub API returned something other than an object")
     archived = data.get("archived")
