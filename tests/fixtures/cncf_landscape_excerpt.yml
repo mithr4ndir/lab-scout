@@ -1,0 +1,174 @@
+# Trimmed from https://raw.githubusercontent.com/cncf/landscape/master/landscape.yml,
+# captured 2026-10-18. Real item blocks, regrouped under their real category and subcategory.
+landscape:
+  - category:
+    name: Provisioning
+    subcategories:
+      - subcategory:
+        name: Automation & Configuration
+        items:
+          - item:
+            name: Akri
+            homepage_url: https://docs.akri.sh
+            project: sandbox
+            repo_url: https://github.com/project-akri/akri
+            logo: akri.svg
+            twitter: https://twitter.com/ProjectAkri
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            description: A Kubernetes Resource Interface for the Edge
+            extra:
+              lfx_slug: akri
+              accepted: '2021-09-14'
+              annual_review_date: '2023-06-13'
+              annual_review_url: https://github.com/cncf/toc/pull/1080
+              dev_stats_url: https://akri.devstats.cncf.io/
+              blog_url: https://medium.com/akri
+              artwork_url: https://github.com/cncf/artwork/blob/main/examples/sandbox_a-j.md#akri-logos
+              slack_url: https://kubernetes.slack.com/messages/C01D9L7QE8Z
+              chat_channel: '#akri'
+              clomonitor_name: akri
+          - item:
+            name: Atlantis
+            description: Terraform Pull Request Automation for Teams
+            homepage_url: https://www.runatlantis.io/
+            repo_url: https://github.com/runatlantis/atlantis
+            logo: atlantis.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            project: sandbox
+            extra:
+              lfx_slug: atlantis
+              accepted: '2024-06-18'
+              clomonitor_name: atlantis
+              artwork_url: https://github.com/cncf/artwork/tree/main/projects/atlantis
+              dev_stats_url: https://atlantis.devstats.cncf.io/
+          - item:
+            name: Ansible
+            homepage_url: https://www.ansible.com/
+            repo_url: https://github.com/ansible/ansible
+            logo: ansible.svg
+            twitter: https://twitter.com/ansible
+            crunchbase: https://www.crunchbase.com/organization/red-hat
+          - item:
+            name: Idem Project
+            description: >-
+              Idem reduces your cloud configuration to data – for you! Instead of Infrastructure as Code, Idem delivers Infrastructure as Data. The cloud becomes simplified, easier to maintain, easier to discover, and easier to use.
+            homepage_url: https://www.idemproject.io
+            logo: idem-project.svg
+            twitter: https://twitter.com/idem_project
+            crunchbase: https://www.crunchbase.com/organization/vmware
+      - subcategory:
+        name: Security & Compliance
+        items:
+          - item:
+            name: Cedar
+            homepage_url: https://cedarpolicy.com
+            logo: cedar.svg
+            description: Cedar is an open source authorization policy language that enables developers to express fine-grained permissions as easy-to-understand policies enforced in their applications, and decouple access control from application logic. Cedar is designed to be ergonomic, fast, safe, and analyzable using automated reasoning. Cedar's simple and intuitive syntax supports common authorization use-cases with readable policies, naturally expressing concepts from role-based, attribute-based, and relation-based access control models. Cedar's policy structure enables authorization requests to be decided quickly. Its policy validator uses optional typing to help policy writers avoid mistakes, but not get in their way. Cedar's design has been finely balanced to allow for a sound, complete, and decidable logical encoding, which enables precise automated analysis of Cedar policies, e.g., to ensure that policy refactoring preserves existing permissions. Cedar's language specification has been formally verified using a theorem prover to satisfy key security properties like `deny trumps allow,` and its implementation in Rust undergoes rigorous differential random testing against its formal specification. By combining mathematical rigor with developer-friendly design, Cedar offers a practical approach to secure, maintainable authorization for modern applications.
+            project: sandbox
+            repo_url: https://github.com/cedar-policy/cedar
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            additional_repos:
+              - repo_url: https://github.com/cedar-policy/cedar-access-control-for-k8s
+            extra:
+              lfx_slug: cedar-policy
+              accepted: '2025-10-08'
+              clomonitor_name: cedar-policy
+              dev_stats_url: https://cedarpolicy.devstats.cncf.io/
+  - category:
+    name: Orchestration & Management
+    subcategories:
+      - subcategory:
+        name: Scheduling & Orchestration
+        items:
+          - item:
+            name: OpenShell
+            description: OpenShell provides secure, policy-enforced sandboxed runtimes for autonomous AI agents.
+            homepage_url: https://docs.nvidia.com/openshell/latest/
+            project: sandbox
+            repo_url: https://github.com/NVIDIA/OpenShell
+            logo: openshell.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              accepted: '2026-09-26'
+              lfx_slug: openshell
+              clomonitor_name: openshell
+      - subcategory:
+        name: Service Proxy
+        items:
+          - item:
+            name: Praxis
+            description: The cloud and AI-native proxy server and framework.
+            homepage_url: https://praxis.fast
+            project: sandbox
+            repo_url: https://github.com/praxis-proxy/praxis
+            logo: cncf.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              accepted: '2026-09-29'
+              lfx_slug: praxis
+              clomonitor_name: praxis
+  - category:
+    name: Observability and Analysis
+    subcategories:
+      - subcategory:
+        name: Feature Flagging
+        items:
+          - item:
+            name: FeatureHub
+            description: "FeatureHub is a Cloud Native Feature Flags, Remote Configuration and A/B Testing Platform suitable for mobile, web and server applications and available with the variety of SDKs. Self-hosted open source or SaaS options are available. "
+            homepage_url: https://www.featurehub.io/
+            repo_url: https://github.com/featurehub-io/featurehub
+            logo: featurehub.svg
+            crunchbase: https://www.crunchbase.com/organization/featurehub
+            twitter: https://x.com/HubFeature
+            extra:
+              slack_url: https://anyways-labs.slack.com
+              blog_url: https://www.featurehub.io/blog
+              youtube_url: https://www.youtube.com/@featurehub2328
+              linkedin_url: https://www.linkedin.com/company/featurehub/
+      - subcategory:
+        name: Observability
+        items:
+          - name: KubeReport
+            description: >-
+              KubeReport is an open-source tool that generates detailed Kubernetes cluster reports in PDF and CSV formats, providing insights into  resource utilization, workload status, and cluster health for easier auditing and troubleshooting.
+            homepage_url: https://kubesuite.org/
+            repo_url: https://github.com/kubesuiteorg/kubereport
+            logo: kubereport.svg
+            extra:
+              linkedin_url: https://www.linkedin.com/company/kubesuite
+          - item:
+            name: Kuberhealthy
+            homepage_url: https://github.com/kuberhealthy/kuberhealthy
+            project: sandbox
+            repo_url: https://github.com/kuberhealthy/kuberhealthy
+            logo: kuberhealthy.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            description: A Kubernetes operator for running synthetic checks as pods. Works great with Prometheus!
+            twitter: https://twitter.com/kuberhealthy
+            extra:
+              lfx_slug: kuberhealthy
+              accepted: '2021-03-30'
+              annual_review_url: https://github.com/cncf/toc/pull/848
+              annual_review_date: '2022-06-09'
+              clomonitor_name: kuberhealthy
+              artwork_url: https://github.com/cncf/artwork/tree/main/projects/kuberhealthy
+              dev_stats_url: https://kuberhealthy.devstats.cncf.io/
+  - category:
+    name: AI Agent
+    subcategories:
+      - subcategory:
+        name: Workflow Orchestration
+        items:
+          - item:
+            name: Hive Commons
+            description: Kubernetes-native orchestration for fleets of AI coding agents that autonomously maintain software repositories.
+            homepage_url: https://hivecommons.dev
+            project: sandbox
+            repo_url: https://github.com/hivecommons/hive
+            logo: hive-commons.svg
+            crunchbase: https://www.crunchbase.com/organization/cloud-native-computing-foundation
+            extra:
+              lfx_slug: hive
+              accepted: '2026-09-29'
+              clomonitor_name: hive

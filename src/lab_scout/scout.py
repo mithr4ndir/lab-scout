@@ -84,6 +84,9 @@ DEFAULT_CLAUDE_MODEL = "opus"
 DEFAULT_CLAUDE_TIMEOUT = 900
 DEFAULT_MAX_IDEAS = 5
 DEFAULT_MAX_STALE_DAYS = 180
+# Discovery sources, in the order they run (see lab_scout.discovery).
+DEFAULT_SOURCES = ("github", "hn", "awesome-selfhosted", "cncf", "distrowatch")
+DEFAULT_SHORTLIST_SIZE = 28
 # The only hosts the model may WebFetch. Web search itself runs on Anthropic's
 # side; a fetch runs from the pod.
 DEFAULT_FETCH_DOMAINS = (
@@ -893,6 +896,18 @@ def checked_text(raw: Any, key: str, cap: int) -> str:
     return text
 
 
+@dataclass(frozen=True)
+class Listed:
+    """A shortlisted candidate as discovery built it. Everything a post shows
+    except the model's text comes from here, never from the model."""
+
+    id: str
+    name: str
+    url: str
+    github: tuple[str, str] | None
+    facts: RepoFacts | None
+
+
 def validate_idea(raw: Any) -> Candidate:
     if not isinstance(raw, dict) or set(raw) != set(IDEA_KEYS):
         raise Rejected("idea does not have exactly the schema keys")
@@ -1370,6 +1385,8 @@ class Config:
     max_ideas: int
     max_stale_days: int
     fetch_domains: tuple[str, ...] = DEFAULT_FETCH_DOMAINS
+    sources: tuple[str, ...] = DEFAULT_SOURCES
+    shortlist_size: int = DEFAULT_SHORTLIST_SIZE
     # SECURITY: kept out of repr so a logged Config can never carry it.
     github_token: str | None = field(default=None, repr=False)
 
@@ -1401,6 +1418,15 @@ class Config:
         valid_domains = tuple(d for d in domains if HOSTNAME_RE.match(d) and not d.endswith(PRIVATE_SUFFIXES))
         if len(valid_domains) != len(domains):
             log.warning("ignoring %d malformed LAB_SCOUT_FETCH_DOMAINS entr(ies)", len(domains) - len(valid_domains))
+        sources_raw = env.get("LAB_SCOUT_SOURCES")
+        sources = DEFAULT_SOURCES
+        if sources_raw is not None:
+            asked = [name.strip().lower() for name in sources_raw.split(",") if name.strip()]
+            unknown = [name for name in asked if name not in DEFAULT_SOURCES]
+            if unknown:
+                log.warning("ignoring %d unknown LAB_SCOUT_SOURCES entr(ies)", len(unknown))
+            # Kept in the canonical order whatever order they were listed in.
+            sources = tuple(name for name in DEFAULT_SOURCES if name in asked)
         token = (env.get(GITHUB_TOKEN_ENV) or "").strip() or None
         if token is not None:
             register_secret(token)
@@ -1418,6 +1444,8 @@ class Config:
             max_ideas=int_env("LAB_SCOUT_MAX_IDEAS", DEFAULT_MAX_IDEAS, 1, EMBEDS_MAX),
             max_stale_days=int_env("LAB_SCOUT_MAX_STALE_DAYS", DEFAULT_MAX_STALE_DAYS, 1, 3650),
             fetch_domains=valid_domains or DEFAULT_FETCH_DOMAINS,
+            sources=sources,
+            shortlist_size=int_env("LAB_SCOUT_SHORTLIST_SIZE", DEFAULT_SHORTLIST_SIZE, 5, 40),
             github_token=token,
         )
 
@@ -1432,6 +1460,10 @@ class Deps:
     repo_url_ok: UrlCheck | None = None
     git_protocols: str = GIT_PROTOCOLS
     github_opener: Opener | None = None
+    # Discovery's GET requests to the source feeds and the search API.
+    source_opener: Opener | None = None
+    # The awesome-selfhosted data repo. Tests point it at a local bare repo.
+    awesome_selfhosted_url: str | None = None
     link_check: Callable[[str], bool] | None = None
     opener: Opener | None = None
     sleep: Sleeper = time.sleep

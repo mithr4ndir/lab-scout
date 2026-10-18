@@ -1,0 +1,145 @@
+{
+ "_comment": "Trimmed from GET https://api.github.com/search/repositories?q=topic:self-hosted+created:>2026-07-20+stars:>50&sort=stars&order=desc, captured 2026-10-18.",
+ "total_count": 306,
+ "incomplete_results": false,
+ "items": [
+  {
+   "name": "Concat",
+   "full_name": "jub0t/Concat",
+   "html_url": "https://github.com/jub0t/Concat",
+   "description": "The truly free, open-source, local-first, cross-platform CapCut replacement. Scriptable through a JSON-RPC API & MCP.",
+   "fork": false,
+   "created_at": "2026-08-25T18:34:47Z",
+   "updated_at": "2026-10-18T16:55:08Z",
+   "pushed_at": "2026-10-18T11:39:59Z",
+   "stargazers_count": 8868,
+   "archived": false,
+   "disabled": false,
+   "license": {
+    "key": "agpl-3.0",
+    "name": "GNU Affero General Public License v3.0",
+    "spdx_id": "AGPL-3.0"
+   },
+   "topics": [
+    "ffmpeg",
+    "free-video-editor",
+    "model-context-protocol",
+    "non-linear-editor",
+    "offline-first",
+    "open-source-video-editor",
+    "self-hosted",
+    "video-editing",
+    "video-editing-automation",
+    "video-editing-software",
+    "video-editing-tools",
+    "video-editor",
+    "voice-cloning",
+    "youtube-automation",
+    "youtube-shorts"
+   ],
+   "default_branch": "main"
+  },
+  {
+   "name": "utopia",
+   "full_name": "deeplethe/utopia",
+   "html_url": "https://github.com/deeplethe/utopia",
+   "description": "World's first open-source enterprise world model.",
+   "fork": false,
+   "created_at": "2026-08-07T19:33:17Z",
+   "updated_at": "2026-10-18T16:15:11Z",
+   "pushed_at": "2026-10-18T15:48:16Z",
+   "stargazers_count": 8427,
+   "archived": false,
+   "disabled": false,
+   "license": {
+    "key": "apache-2.0",
+    "name": "Apache License 2.0",
+    "spdx_id": "Apache-2.0"
+   },
+   "topics": [
+    "agent-memory",
+    "bitemporal",
+    "graphrag",
+    "knowledge-base",
+    "knowledge-graph",
+    "llm",
+    "ontology",
+    "pgvector",
+    "postgresql",
+    "rag",
+    "rust",
+    "self-hosted",
+    "semantic-search",
+    "temporal-knowledge-graph",
+    "world-model"
+   ],
+   "default_branch": "main"
+  },
+  {
+   "name": "AIHOT",
+   "full_name": "KKKKhazix/AIHOT",
+   "html_url": "https://github.com/KKKKhazix/AIHOT",
+   "description": "一个自己找热点、自己写日报的网站框架。把信源和精选标准换成你的，它就是你的行业热点站。",
+   "fork": false,
+   "created_at": "2026-09-28T23:40:05Z",
+   "updated_at": "2026-10-18T16:39:04Z",
+   "pushed_at": "2026-10-17T19:33:38Z",
+   "stargazers_count": 8004,
+   "archived": false,
+   "disabled": false,
+   "license": {
+    "key": "mit",
+    "name": "MIT License",
+    "spdx_id": "MIT"
+   },
+   "topics": [
+    "ai",
+    "chinese",
+    "content-curation",
+    "daily-digest",
+    "docker-compose",
+    "llm",
+    "mcp",
+    "news-aggregator",
+    "postgresql",
+    "rss",
+    "self-hosted",
+    "typescript"
+   ],
+   "default_branch": "main"
+  },
+  {
+   "name": "OpenMausBot",
+   "full_name": "milind-soni/OpenMausBot",
+   "html_url": "https://github.com/milind-soni/OpenMausBot",
+   "description": "Open-source Grok Bot alternative with a virtual machine that bots can use",
+   "fork": false,
+   "created_at": "2026-08-11T18:58:55Z",
+   "updated_at": "2026-10-18T16:37:35Z",
+   "pushed_at": "2026-10-18T16:37:20Z",
+   "stargazers_count": 5101,
+   "archived": false,
+   "disabled": false,
+   "license": {
+    "key": "apache-2.0",
+    "name": "Apache License 2.0",
+    "spdx_id": "Apache-2.0"
+   },
+   "topics": [
+    "ai-agents",
+    "claude-code",
+    "codex",
+    "computer-use",
+    "docker",
+    "electron",
+    "expo",
+    "grok",
+    "grok-bot",
+    "grok-bot-alternative",
+    "self-hosted",
+    "typescript"
+   ],
+   "default_branch": "main"
+  }
+ ]
+}
