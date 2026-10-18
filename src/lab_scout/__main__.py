@@ -1,4 +1,4 @@
-"""Entry point: python -m lab_scout weekly [--dry-run]."""
+"""Entry point: python -m lab_scout weekly [--dry-run | --collect-only]."""
 
 import sys
 
