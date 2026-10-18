@@ -1,0 +1,60 @@
+{
+ "_comment": "Trimmed from GET https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&numericFilters=points>100,created_at_i>(90 days ago)&hitsPerPage=100, captured 2026-10-18.",
+ "nbHits": 178,
+ "hits": [
+  {
+   "title": "Show HN: Mini-AGI – Dynamic continual learning model trained on 8GB VRAM",
+   "url": "https://github.com/volotat/mini-AGI/",
+   "points": 277,
+   "created_at": "2026-09-21T04:42:37Z",
+   "created_at_i": 1789965757,
+   "objectID": "49783133",
+   "num_comments": 80
+  },
+  {
+   "title": "Show HN: An e-ink frame that hears birds and draws them as 1800s illustrations",
+   "url": "https://github.com/arnegiacomo/fugleramme",
+   "points": 2391,
+   "created_at": "2026-09-15T12:31:10Z",
+   "created_at_i": 1789475470,
+   "objectID": "49711544",
+   "num_comments": 267
+  },
+  {
+   "title": "Show HN: TERMy – A fast terminal assistant that does not use LLMs",
+   "url": "https://github.com/gioblu/NPC-Forge/blob/main/docs/development.md",
+   "points": 225,
+   "created_at": "2026-09-04T09:03:00Z",
+   "created_at_i": 1788512580,
+   "objectID": "49562219",
+   "num_comments": 45
+  },
+  {
+   "title": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+   "url": "https://sphinx-six-theta.vercel.app/",
+   "points": 209,
+   "created_at": "2026-10-18T04:33:49Z",
+   "created_at_i": 1792298029,
+   "objectID": "50137950",
+   "num_comments": 69
+  },
+  {
+   "title": "Show HN: High-quality duck audio synthesizer",
+   "url": "https://celphase.github.io/duck-pond/",
+   "points": 159,
+   "created_at": "2026-10-17T13:28:46Z",
+   "created_at_i": 1792243726,
+   "objectID": "50131006",
+   "num_comments": 38
+  },
+  {
+   "title": "Show HN: Open-source model routing for coding agents at Astra-level performance",
+   "url": null,
+   "points": 123,
+   "created_at": "2026-09-30T16:58:24Z",
+   "created_at_i": 1790787504,
+   "objectID": "49911500",
+   "num_comments": 42
+  }
+ ]
+}
